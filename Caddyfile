@@ -1,0 +1,14 @@
+:3000 {
+		  reverse_proxy /svc1/* service1:3000
+		  reverse_proxy /svc2/* service2:3000
+}
+
+# https://caddyserver.com/docs/caddyfile/directives/handle_path#examples
+:3001 {
+		  handle_path /svc1/* {
+					 reverse_proxy service1:3000
+		  }
+		  handle_path /svc2/* {
+					 reverse_proxy service2:3000
+		  }
+}

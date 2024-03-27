@@ -1,0 +1,25 @@
+services:
+  caddy:
+    container_name: caddy
+    image: caddy:2.7.6-alpine
+    ports:
+      - 3000:3000
+      - 3001:3001
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+
+  service1:
+    container_name: service1 # acts as a hostname
+    build:
+      dockerfile: Dockerfile
+    environment:
+      WHOAMI: service1
+      LISTEN_ADDRESS: 0.0.0.0:3000
+
+  service2:
+    container_name: service2 # acts as a hostname
+    build:
+      dockerfile: Dockerfile
+    environment:
+      WHOAMI: service2
+      LISTEN_ADDRESS: 0.0.0.0:3000
